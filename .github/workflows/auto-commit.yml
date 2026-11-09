@@ -1,0 +1,28 @@
+name: Auto Commit
+
+on:
+  schedule:
+    # Executa 3 vezes ao dia (às 10h, 15h e 20h UTC)
+    - cron: '0 10,15,20 * * *'
+  workflow_dispatch: # Permite disparar manualmente para testar
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Atualizar log de atividade
+        run: |
+          echo "Update: $(date -u)" >> activity.txt
+
+      - name: Commitar e subir alterações
+        run: |
+          git config user.name "GuiOlialves"
+          git config user.email "guilhermeolialves37@gmail.com"
+          git add activity.txt
+          git commit -m "chore: update activity log" || exit 0
+          git push
