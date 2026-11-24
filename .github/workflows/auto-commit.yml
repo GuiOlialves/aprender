@@ -4,7 +4,7 @@ on:
   schedule:
     # Executa 3 vezes ao dia (às 10h, 15h e 20h UTC)
     - cron: '0 10,15,20 * * *'
-  workflow_dispatch: # Permite disparar manualmente para testar
+  workflow_dispatch: # Permite disparar manualmente para testa
 
 jobs:
   commit:
